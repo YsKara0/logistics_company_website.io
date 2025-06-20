@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atlı Depo Hizmetleri - Günlük İş Gücü Temini</title>    <meta name="description" content="İstanbul Avrupa Yakası'nda depolar için güvenilir günlük iş gücü temini. Kumaş, konteyner, tır boşaltma ve ağır el işçiliği hizmetleri.">
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <img src="images/logo.png" alt="Logo" class="loading-logo">
+        <div class="loading-text">AtlıDepoHizmetleri.com</div>
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="Atlı Depo Hizmetleri">
+            </a>
+            <nav class="nav">
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="index.html" class="active">Ana Sayfa</a></li>
+                    <li><a href="hakkimizda.html">Hakkımızda</a></li>
+                    <li><a href="vizyon-misyon.html">Vizyon & Misyon</a></li>
+                    <li><a href="referanslar.html">Referanslar</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h2>Depolarınıza Günlük Çalışan Temin Edin</h2>
+                    <p>İstanbul Avrupa Yakası'nda güvenilir günlük iş gücü temini</p>
+                    <div class="service-tags">
+                        <span>Kumaş Boşaltma</span>
+                        <span>Konteyner Boşaltma</span>
+                        <span>Tır Boşaltma</span>
+                        <span>Makine İşçiliği</span>
+                        <span>Ağır El İşçiliği</span>
+                    </div>
+                </div>
+                <div class="hero-form">
+                    <div class="form-container">
+                        <h3>Eleman Talep Formu</h3>
+                        <form id="request-form">
+                            <div class="form-group">
+                                <label for="company">Firma Adı</label>
+                                <input type="text" id="company" name="company" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">E-posta</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="location">Konum</label>
+                                <select id="location" name="location" required>
+                                    <option value="">Bölge Seçin</option>
+                                    <option value="Başakşehir">Başakşehir</option>
+                                    <option value="Hadımköy">Hadımköy</option>
+                                    <option value="Esenyurt">Esenyurt</option>
+                                    <option value="Beylikdüzü">Beylikdüzü</option>
+                                    <option value="Çatalca">Çatalca</option>
+                                    <option value="Diğer">Diğer</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="description">İhtiyaç Açıklaması</label>
+                                <textarea id="description" name="description" rows="4" placeholder="Kaç kişi, hangi tarih, nasıl bir iş vb."></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary">Talep Gönder</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services">
+        <div class="container">
+            <h2>Hizmet Alanlarımız</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Kumaş Boşaltma</h3>
+                    <p>Tekstil firmalarının kumaş yükleme ve boşaltma işlemleri için deneyimli personel</p>
+                </div>
+                <div class="service-card">
+                    <h3>Konteyner/Tır Boşaltma</h3>
+                    <p>Hızlı ve güvenli konteyner ile tır boşaltma işlemleri</p>
+                </div>
+                <div class="service-card">
+                    <h3>Makine İşçiliği</h3>
+                    <p>Makine operatörlüğü ve teknik destek hizmetleri</p>
+                </div>
+                <div class="service-card">
+                    <h3>Ağır El İşçiliği</h3>
+                    <p>Depo ve atölye işleri için fiziksel güç gerektiren tüm işler</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Info -->
+    <section class="contact-info">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <h3>Hizmet Bölgelerimiz</h3>
+                    <ul>
+                        <li>Başakşehir</li>
+                        <li>Hadımköy</li>
+                        <li>Esenyurt</li>
+                        <li>Beylikdüzü</li>
+                        <li>Çatalca</li>
+                    </ul>
+                </div>
+                <div class="contact-item">
+                    <h3>Çalışma Saatleri</h3>
+                    <p>Pazartesi - Cumartesi: 08:00 - 18:00</p>
+                    <p>Pazar: Acil durumlar için</p>
+                </div>
+                <div class="contact-item">
+                    <h3>İletişim</h3>
+                    <p>Telefon: +90 (212) XXX XX XX</p>
+                    <p>E-posta: info@atlidepohizmetleri.com</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">                <div class="footer-left">
+                    <a href="index.html" class="footer-logo">
+                        <img src="images/logo.png" alt="Atlı Depo Hizmetleri Logo" class="footer-logo-img">
+                        <h3>AtlıDepoHizmetleri.com</h3>
+                    </a>
+                    <p>İstanbul Avrupa Yakası'nda güvenilir günlük iş gücü temini</p>
+                </div>
+                <div class="footer-right">
+                    <p>&copy; 2025 Atlı Lojistik ve Depolama Hizmetleri. Tüm hakları saklıdır.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
