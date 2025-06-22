@@ -57,10 +57,8 @@ function handleFormSubmit(e) {
     if (!isValidEmail(email)) {
         showFormMessage('Lütfen geçerli bir e-posta adresi girin.', 'error');
         return;
-    }
-
-    // Simulate form submission
-    simulateFormSubmission(company, email, location, description);
+    }    // Submit form to backend
+    submitFormToBackend(formData);
 }
 
 function isValidEmail(email) {
@@ -68,40 +66,58 @@ function isValidEmail(email) {
     return emailRegex.test(email);
 }
 
-function simulateFormSubmission(company, email, location, description) {
+function submitFormToBackend(formData) {
     // Show loading state
     const submitBtn = requestForm.querySelector('.btn-primary');
     const originalText = submitBtn.textContent;
     submitBtn.textContent = 'Gönderiliyor...';
     submitBtn.disabled = true;
 
-    // Simulate API call delay
-    setTimeout(() => {
-        // Show success message
-        showFormMessage('Talebiniz başarıyla gönderildi! En kısa sürede size dönüş yapacağız.', 'success');
-        
-        // Reset form
-        requestForm.reset();
-        
+    // Convert FormData to URLSearchParams for form-encoded data
+    const params = new URLSearchParams();
+    params.append('company', formData.get('company'));
+    params.append('email', formData.get('email'));
+    params.append('location', formData.get('location'));
+    params.append('description', formData.get('description') || '');
+
+    // Submit to your backend endpoint
+    fetch('https://kssapp-5eec8a154e32.herokuapp.com/api/public/employee-request', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: params
+    })
+    .then(response => {
+        response.json()
+        console.log('Response:', response);
+    })
+    .then(data => {
+        if (data.success) {
+            // Show success message
+            showFormMessage(data.message, 'success');
+            console.log('Form submitted successfully:', data);
+            
+            // Reset form
+            requestForm.reset();
+            
+            // Auto-hide success message after 5 seconds
+            setTimeout(() => {
+                hideFormMessage();
+            }, 5000);
+        } else {
+            throw new Error(data.message || 'Form gönderimi başarısız oldu');
+        }
+    })
+    .catch(error => {
+        console.error('Form submission error:', error);
+        showFormMessage(error.message || 'Form gönderimi sırasında bir hata oluştu. Lütfen tekrar deneyin.', 'error');
+    })
+    .finally(() => {
         // Reset button
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
-
-        // Log form data (in real app, this would be sent to server)
-        console.log('Form submitted:', {
-            company,
-            email,
-            location,
-            description,
-            timestamp: new Date().toISOString()
-        });
-
-        // Auto-hide success message after 5 seconds
-        setTimeout(() => {
-            hideFormMessage();
-        }, 5000);
-
-    }, 1500);
+    });
 }
 
 function showFormMessage(message, type) {
