@@ -76,6 +76,7 @@ p {
     top: 0;
     z-index: 1000;
     height: 90px;
+    overflow: visible;
 }
 
 .header .container {
@@ -84,6 +85,7 @@ p {
     align-items: center;
     height: 100%;
     padding: 0 20px;
+    position: relative;
 }
 
 .logo {
@@ -114,8 +116,7 @@ p {
     }
     
     .logo img {
-        height: 60px;
-    }
+        height: 60px;    }
 }
 
 @media (max-width: 480px) {
@@ -129,6 +130,15 @@ p {
     
     .footer-logo-img {
         height: 35px;
+    }
+    
+    .nav-menu {
+        top: 70px;
+        padding: 1rem 20px;
+    }
+    
+    .container {
+        padding: 0 15px;
     }
 }
 
@@ -179,6 +189,19 @@ p {
     height: 3px;
     background-color: #333;
     transition: 0.3s;
+    transform-origin: center;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
 }
 
 /* Hero Section */
@@ -840,13 +863,12 @@ p {
     
     .hamburger {
         display: flex;
-    }
-
-    .nav-menu {
-        position: absolute;
-        top: 100%;
+    }    .nav-menu {
+        position: fixed;
+        top: 90px;
         left: 0;
         right: 0;
+        width: 100%;
         background-color: white;
         flex-direction: column;
         padding: 1rem 20px;
@@ -856,6 +878,8 @@ p {
         opacity: 0;
         visibility: hidden;
         transition: all 0.3s ease;
+        z-index: 999;
+        border-top: 1px solid #eee;
     }
 
     .nav-menu.active {
@@ -912,29 +936,7 @@ p {
         font-size: 2rem;
     }
 
-    .container {
-        padding: 0 15px;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero-text h2 {
-        font-size: 1.5rem;
-    }
-
-    .form-container {
-        padding: 1.5rem;
-    }
-
-    .vm-card {
-        padding: 2rem;
-    }
-
-    .value-item,
-    .service-card,
-    .sector-card,
-    .company-card {
-        padding: 1.5rem;
+    .container {        padding: 0 15px;
     }
 }
 
