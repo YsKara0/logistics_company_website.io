@@ -48,7 +48,7 @@ p {
 
 /* Buttons */
 .btn-primary {
-    background-color: #e60000;
+    background-color: #A21B13;
     color: white;
     padding: 12px 24px;
     border: none;
@@ -63,9 +63,9 @@ p {
 }
 
 .btn-primary:hover {
-    background-color: #cc0000;
+    background-color: #8B1611;
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(230, 0, 0, 0.3);
+    box-shadow: 0 4px 8px rgba(162, 27, 19, 0.3);
 }
 
 /* Header */
@@ -153,7 +153,7 @@ p {
 
 .nav-menu a:hover,
 .nav-menu a.active {
-    color: #e60000;
+    color: #A21B13;
 }
 
 .nav-menu a.active::after {
@@ -163,7 +163,7 @@ p {
     left: 0;
     width: 100%;
     height: 2px;
-    background-color: #e60000;
+    background-color: #A21B13;
 }
 
 /* Hamburger Menu */
@@ -229,7 +229,7 @@ p {
 }
 
 .service-tags span {
-    background-color: #e60000;
+    background-color: #A21B13;
     color: white;
     padding: 0.5rem 1rem;
     border-radius: 20px;
@@ -243,7 +243,7 @@ p {
     border-radius: 10px;
     padding: 0;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    border: 2px solid #e60000;
+    border: 2px solid #A21B13;
 }
 
 .form-container {
@@ -251,7 +251,7 @@ p {
 }
 
 .form-container h3 {
-    color: #e60000;
+    color: #A21B13;
     text-align: center;
     margin-bottom: 1.5rem;
     font-size: 1.3rem;
@@ -283,7 +283,7 @@ p {
 .form-group select:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: #e60000;
+    border-color: #A21B13;
     box-shadow: 0 0 0 3px rgba(230, 0, 0, 0.1);
 }
 
@@ -316,7 +316,7 @@ p {
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
-    border-top: 4px solid #e60000;
+    border-top: 4px solid #A21B13;
 }
 
 .service-card:hover {
@@ -324,7 +324,7 @@ p {
 }
 
 .service-card h3 {
-    color: #e60000;
+    color: #A21B13;
     margin-bottom: 1rem;
 }
 
@@ -341,7 +341,7 @@ p {
 }
 
 .contact-item h3 {
-    color: #e60000;
+    color: #A21B13;
     margin-bottom: 1rem;
 }
 
@@ -357,7 +357,7 @@ p {
 
 /* Page Header */
 .page-header {
-    background: linear-gradient(135deg, #e60000 0%, #cc0000 100%);
+    background: linear-gradient(135deg, #A21B13 0%, #8B1611 100%);
     color: white;
     padding: 4rem 0;
     text-align: center;
@@ -379,14 +379,15 @@ p {
     padding: 4rem 0;
 }
 
-.about-grid {
+.about-founder-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 3fr 2fr;
     gap: 4rem;
+    align-items: start;
 }
 
 .about-text h2 {
-    color: #e60000;
+    color: #A21B13;
     margin-bottom: 2rem;
 }
 
@@ -394,6 +395,30 @@ p {
     color: #000000;
     margin-top: 2rem;
     margin-bottom: 1rem;
+}
+
+.founder-info h2 {
+    color: #A21B13;
+    margin-bottom: 2rem;
+}
+
+.founder-info .founder-content {
+    background-color: #f8f9fa;
+    padding: 2rem;
+    border-radius: 10px;
+    border-left: 4px solid #A21B13;
+}
+
+.founder-info h3 {
+    color: #A21B13;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.founder-title {
+    color: #666;
+    font-style: italic;
+    margin-bottom: 1.5rem;
 }
 
 .stats {
@@ -408,7 +433,7 @@ p {
 
 .stat-item h4 {
     font-size: 2rem;
-    color: #e60000;
+    color: #A21B13;
     margin-bottom: 0.5rem;
 }
 
@@ -417,9 +442,21 @@ p {
     font-size: 0.9rem;
 }
 
+.about-features {
+    padding: 4rem 0;
+    background-color: #f8f9fa;
+}
+
 .about-features h2 {
-    color: #e60000;
+    color: #A21B13;
     margin-bottom: 2rem;
+    text-align: center;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
 }
 
 .feature {
@@ -427,7 +464,7 @@ p {
     padding: 1.5rem;
     border-radius: 8px;
     margin-bottom: 1rem;
-    border-left: 4px solid #e60000;
+    border-left: 4px solid #A21B13;
 }
 
 .feature h3 {
@@ -440,35 +477,6 @@ p {
     color: #666;
     margin-bottom: 0;
     font-size: 0.95rem;
-}
-
-/* Founder Section */
-.founder-section {
-    padding: 4rem 0;
-    background-color: #f8f9fa;
-}
-
-.founder-section h2 {
-    text-align: center;
-    color: #000000;
-    margin-bottom: 3rem;
-}
-
-.founder-content {
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.founder-content h3 {
-    color: #e60000;
-    font-size: 1.8rem;
-}
-
-.founder-title {
-    color: #666;
-    font-style: italic;
-    margin-bottom: 2rem;
 }
 
 /* Vision Mission */
@@ -491,7 +499,7 @@ p {
 }
 
 .vision-card {
-    border-top: 5px solid #e60000;
+    border-top: 5px solid #A21B13;
 }
 
 .mission-card {
@@ -508,7 +516,7 @@ p {
 }
 
 .vision-card h2 {
-    color: #e60000;
+    color: #A21B13;
 }
 
 .mission-card h2 {
@@ -530,7 +538,7 @@ p {
 }
 
 .point h4 {
-    color: #e60000;
+    color: #A21B13;
     margin-bottom: 0.5rem;
 }
 
@@ -558,7 +566,7 @@ p {
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     text-align: center;
-    border-top: 4px solid #e60000;
+    border-top: 4px solid #A21B13;
 }
 
 .value-icon {
@@ -567,7 +575,7 @@ p {
 }
 
 .value-item h3 {
-    color: #e60000;
+    color: #A21B13;
     margin-bottom: 1rem;
 }
 
@@ -592,11 +600,11 @@ p {
     background-color: #f8f9fa;
     padding: 2rem;
     border-radius: 10px;
-    border-left: 5px solid #e60000;
+    border-left: 5px solid #A21B13;
 }
 
 .goal-item h3 {
-    color: #e60000;
+    color: #A21B13;
     margin-bottom: 1.5rem;
 }
 
@@ -615,7 +623,7 @@ p {
     content: '✓';
     position: absolute;
     left: 0;
-    color: #e60000;
+    color: #A21B13;
     font-weight: bold;
 }
 
@@ -653,7 +661,7 @@ p {
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    border-top: 4px solid #e60000;
+    border-top: 4px solid #A21B13;
 }
 
 .sector-icon {
@@ -664,7 +672,7 @@ p {
 
 .sector-card h3,
 .company-card h3 {
-    color: #e60000;
+    color: #A21B13;
     margin-bottom: 1rem;
 }
 
@@ -685,11 +693,11 @@ p {
 .sector-services span,
 .company-services span {
     background-color: #f8f9fa;
-    color: #e60000;
+    color: #A21B13;
     padding: 0.3rem 0.8rem;
     border-radius: 15px;
     font-size: 0.8rem;
-    border: 1px solid #e60000;
+    border: 1px solid #A21B13;
 }
 
 /* Testimonials */
@@ -705,12 +713,12 @@ p {
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     position: relative;
-    border-left: 5px solid #e60000;
+    border-left: 5px solid #A21B13;
 }
 
 .quote-icon {
     font-size: 3rem;
-    color: #e60000;
+    color: #A21B13;
     position: absolute;
     top: 1rem;
     right: 1.5rem;
@@ -724,7 +732,7 @@ p {
 }
 
 .testimonial-author strong {
-    color: #e60000;
+    color: #A21B13;
     display: block;
     margin-bottom: 0.3rem;
 }
@@ -747,13 +755,13 @@ p {
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     text-align: center;
-    border-top: 4px solid #e60000;
+    border-top: 4px solid #A21B13;
 }
 
 .stat-number {
     font-size: 3rem;
     font-weight: bold;
-    color: #e60000;
+    color: #A21B13;
     margin-bottom: 0.5rem;
 }
 
@@ -802,7 +810,7 @@ p {
 }
 
 .footer-left h3 {
-    color: #e60000;
+    color: #A21B13;
     margin-bottom: 0;
     transition: color 0.3s ease;
 }
@@ -875,9 +883,12 @@ p {
 
     .vm-grid {
         grid-template-columns: 1fr;
+    }    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
     }
 
-    .about-grid {
+    .about-founder-grid {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
@@ -951,7 +962,7 @@ p {
 }
 
 .loading-text {
-    color: #e60000;
+    color: #A21B13;
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 1rem;
@@ -961,7 +972,7 @@ p {
     width: 40px;
     height: 40px;
     border: 4px solid #f3f3f3;
-    border-top: 4px solid #e60000;
+    border-top: 4px solid #A21B13;
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
