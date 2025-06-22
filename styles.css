@@ -140,6 +140,47 @@ p {
     .container {
         padding: 0 15px;
     }
+    
+    .footer {
+        padding: 2rem 0;
+    }
+    
+    .footer-content {
+        padding: 0 10px;
+    }
+    
+    .footer-logo h3 {
+        font-size: 1rem;
+        line-height: 1.3;
+    }
+    
+    .footer-left p,
+    .footer-right p {
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+}
+
+@media (max-width: 360px) {
+    .footer-content {
+        padding: 0 5px;
+    }
+    
+    .footer-logo h3 {
+        font-size: 0.9rem;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    
+    .footer-left p,
+    .footer-right p {
+        font-size: 0.8rem;
+        padding: 0 5px;
+    }
+    
+    .container {
+        padding: 0 10px;
+    }
 }
 
 .nav {
@@ -799,12 +840,14 @@ p {
     color: white;
     padding: 3rem 0;
     margin-top: 4rem;
+    overflow: hidden;
 }
 
 .footer-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .footer-logo {
@@ -924,12 +967,31 @@ p {
 
     .goals-content {
         grid-template-columns: 1fr;
-    }
-
-    .footer-content {
+    }    .footer-content {
         flex-direction: column;
         gap: 2rem;
         text-align: center;
+        padding: 0 1rem;
+    }
+    
+    .footer-left {
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .footer-right {
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .footer-logo {
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+    
+    .footer-logo h3 {
+        font-size: 1.2rem;
+        word-break: break-word;
     }
 
     .page-header h1 {
@@ -937,6 +999,28 @@ p {
     }
 
     .container {        padding: 0 15px;
+    }
+}
+
+@media (max-width: 360px) {
+    .footer-content {
+        padding: 0 5px;
+    }
+    
+    .footer-logo h3 {
+        font-size: 0.9rem;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    
+    .footer-left p,
+    .footer-right p {
+        font-size: 0.8rem;
+        padding: 0 5px;
+    }
+    
+    .container {
+        padding: 0 10px;
     }
 }
 
