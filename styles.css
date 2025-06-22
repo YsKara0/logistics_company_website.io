@@ -12,6 +12,8 @@ body {
     background-color: #ffffff;
 }
 
+
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -183,6 +185,20 @@ p {
 .hero {
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     padding: 4rem 0;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url('images/background.png') no-repeat center center;
+    background-size: 100%; /* cover yerine yüzde değeri kullanarak zoom out yapıyoruz */
+    opacity: 0.25; /* Saydamlık oranı */
+    z-index: -1;
+    pointer-events: none;
 }
 
 .hero-content {
