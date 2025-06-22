@@ -89,8 +89,8 @@ function submitFormToBackend(formData) {
         body: params
     })
     .then(response => {
-        response.json()
         console.log('Response:', response);
+        return response.json();
     })
     .then(data => {
         if (data.success) {
