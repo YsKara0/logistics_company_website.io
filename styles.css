@@ -1330,3 +1330,148 @@ body.js-loaded .loading-screen {
         font-size: 20px;
     }
 }
+
+/* Work Methodology Section */
+.work-methodology {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    position: relative;
+}
+
+.work-methodology h2 {
+    text-align: center;
+    color: #A21B13;
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+}
+
+.methodology-subtitle {
+    text-align: center;
+    color: #666;
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.methodology-steps {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.step-card {
+    flex: 1;
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+.step-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(162, 27, 19, 0.15);
+}
+
+.step-number {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #A21B13;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.step-icon {
+    font-size: 3rem;
+    margin: 1rem 0;
+    display: block;
+}
+
+.step-card h3 {
+    color: #A21B13;
+    margin-bottom: 1.5rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.step-list {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+}
+
+.step-list li {
+    padding: 0.5rem 0;
+    color: #555;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.step-list li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #A21B13;
+    font-weight: bold;
+}
+
+.step-arrow {
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
+    color: #A21B13;
+    font-weight: bold;
+    margin-top: 3rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .methodology-steps {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .step-arrow {
+        transform: rotate(90deg);
+        margin: 1rem 0;
+        align-self: center;
+    }
+    
+    .work-methodology h2 {
+        font-size: 2rem;
+    }
+    
+    .step-card {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .work-methodology {
+        padding: 2rem 0;
+    }
+    
+    .step-card {
+        padding: 1rem;
+    }
+    
+    .step-icon {
+        font-size: 2.5rem;
+    }
+}
