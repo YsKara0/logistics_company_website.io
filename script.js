@@ -81,7 +81,7 @@ function submitFormToBackend(formData) {
     params.append('description', formData.get('description') || '');
 
     // Submit to your backend endpoint
-    fetch('https://kssapp-5eec8a154e32.herokuapp.com/api/public/employee-request', {
+    fetch('https://atli-app-10e5b634de0b.herokuapp.com/api/v1/public/employee-request', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
