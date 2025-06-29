@@ -63,7 +63,7 @@ function handleFormSubmit(e) {
         showFormMessage('Lütfen geçerli bir e-posta adresi girin.', 'error');
         return;
     }    // Submit form to backend
-    submitFormToBackend(formData);
+    submitEmployeeRequestForm(formData);
 }
 
 function isValidEmail(email) {
@@ -71,7 +71,7 @@ function isValidEmail(email) {
     return emailRegex.test(email);
 }
 
-function submitFormToBackend(formData) {
+function submitEmployeeRequestForm(formData) {
     // Show loading state
     const submitBtn = requestForm.querySelector('.btn-primary');
     const originalText = submitBtn.textContent;
@@ -94,14 +94,12 @@ function submitFormToBackend(formData) {
         body: params
     })
     .then(response => {
-        console.log('Response:', response);
         return response.json();
     })
     .then(data => {
         if (data.success) {
             // Show success message
             showFormMessage(data.message, 'success');
-            console.log('Form submitted successfully:', data);
             
             // Reset form
             requestForm.reset();
@@ -296,7 +294,6 @@ function throttle(func, limit) {
 // Performance Optimization
 const debouncedResize = debounce(() => {
     // Handle any resize-specific logic here
-    console.log('Window resized');
 }, 250);
 
 const throttledScroll = throttle(() => {
@@ -308,7 +305,6 @@ window.addEventListener('scroll', throttledScroll);
 
 // Initialize all functionality when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('AtlıDepoHizmetleri.com - JavaScript loaded');
     
     // Initialize all features
     initMobileMenu();
@@ -324,16 +320,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Add some CSS classes for enhanced styling
     document.body.classList.add('js-loaded');
-    
-    // Console welcome message
-    console.log(`
-    🏭 AtlıDepoHizmetleri.com
-    📧 İletişim: info@atlidepohizmetleri.com
-    📱 Responsive Design ✓
-    🎯 Modern JavaScript ✓
-    🔄 Circular Split Button ✓
-    ✅ Multiple Selection Forms ✓
-    `);
 });
 
 // Handle form submission for contact info section
@@ -368,7 +354,6 @@ document.addEventListener('click', (e) => {
 document.addEventListener('click', (e) => {
     if (e.target.matches('.service-tags span')) {
         const service = e.target.textContent;
-        console.log(`Service clicked: ${service}`);
         
         // In a real application, you might send this to analytics
         // gtag('event', 'service_interest', {
@@ -608,15 +593,23 @@ function submitApplyFormToBackend(name, email, workLocations, skills) {
     submitBtn.textContent = 'Gönderiliyor...';
     submitBtn.disabled = true;
 
-    // Convert arrays to comma-separated strings for backend
+    // Create form data with arrays for backend
     const params = new URLSearchParams();
     params.append('name', name);
     params.append('email', email);
-    params.append('workLocation', workLocations.join(', '));
-    params.append('skills', skills.join(', '));
+    
+    // Add each work location as separate parameter
+    workLocations.forEach(location => {
+        params.append('workLocation', location);
+    });
+    
+    // Add each skill as separate parameter
+    skills.forEach(skill => {
+        params.append('skills', skill);
+    });
 
     // Submit to backend endpoint
-    fetch('https://atli-app-10e5b634de0b.herokuapp.com/api/v1/public/job-application', {
+    fetch('https://atli-app-10e5b634de0b.herokuapp.com/api/v1/public/employee-application', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -624,26 +617,31 @@ function submitApplyFormToBackend(name, email, workLocations, skills) {
         body: params
     })
     .then(response => {
-        console.log('Apply Response:', response);
         return response.json();
     })
     .then(data => {
-        console.log('Apply Success:', data);
-        showApplyFormMessage('Başvurunuz başarıyla gönderildi! En kısa sürede size dönüş yapacağız.', 'success');
-        applyForm.reset();
-        
-        // Close popup after 3 seconds
-        setTimeout(() => {
-            const circularPopup = document.getElementById('circular-popup');
-            if (circularPopup) {
-                circularPopup.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        }, 3000);
+        if (data.success) {
+            // Show success message
+            showApplyFormMessage(data.message, 'success');
+            
+            // Reset form
+            applyForm.reset();
+            
+            // Close popup after 3 seconds
+            setTimeout(() => {
+                const circularPopup = document.getElementById('circular-popup');
+                if (circularPopup) {
+                    circularPopup.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            }, 3000);
+        } else {
+            throw new Error(data.message || 'Başvuru gönderimi başarısız oldu');
+        }
     })
     .catch(error => {
-        console.error('Apply Error:', error);
-        showApplyFormMessage('Başvuru gönderilirken bir hata oluştu. Lütfen tekrar deneyiniz.', 'error');
+        console.error('Apply form submission error:', error);
+        showApplyFormMessage(error.message || 'Başvuru gönderilirken bir hata oluştu. Lütfen tekrar deneyiniz.', 'error');
     })
     .finally(() => {
         // Reset button
