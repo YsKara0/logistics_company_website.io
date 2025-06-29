@@ -56,40 +56,132 @@
             </div>
           </div>
           <div class="hero-form">
-            <div class="form-container">
-              <h3>Eleman Talep Formu</h3>
-              <form id="request-form">
-                <div class="form-group">
-                  <label for="company">Firma Adı</label>
-                  <input type="text" id="company" name="company" required />
+            <!-- Circular Split Button -->
+            <div class="circular-split-button" id="split-button">
+              <div class="split-button-top" data-action="employee-request">
+                <span>Personel Talebi</span>
+              </div>
+              <div class="split-button-divider"></div>
+              <div class="split-button-bottom" data-action="apply">
+                <span>Başvur</span>
+              </div>
+            </div>
+
+            <!-- Circular Popup Form -->
+            <div class="circular-popup" id="circular-popup">
+              <div class="popup-close" id="popup-close">&times;</div>
+              <div class="popup-content">
+                <div class="popup-top">
+                  <h3 id="popup-title">Personel Talebi</h3>
                 </div>
-                <div class="form-group">
-                  <label for="email">E-posta</label>
-                  <input type="email" id="email" name="email" required />
+                <div class="popup-divider"></div>
+                <div class="popup-bottom">
+                  <!-- Employee Request Form -->
+                  <form id="request-form" class="popup-form">
+                    <div class="form-group">
+                      <label for="company">Firma Adı</label>
+                      <input type="text" id="company" name="company" required />
+                    </div>
+                    <div class="form-group">
+                      <label for="email">E-posta</label>
+                      <input type="email" id="email" name="email" required />
+                    </div>
+                    <div class="form-group">
+                      <label for="location">Konum</label>
+                      <select id="location" name="location" required>
+                        <option value="">Bölge Seçin</option>
+                        <option value="Başakşehir">Başakşehir</option>
+                        <option value="Hadımköy">Hadımköy</option>
+                        <option value="Esenyurt">Esenyurt</option>
+                        <option value="Beylikdüzü">Beylikdüzü</option>
+                        <option value="Çatalca">Çatalca</option>
+                        <option value="Diğer">Diğer</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="description">İhtiyaç Açıklaması</label>
+                      <textarea
+                        id="description"
+                        name="description"
+                        rows="4"
+                        placeholder="Kaç kişi, hangi tarih, nasıl bir iş vb."
+                      ></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Talep Gönder</button>
+                  </form>
+
+                  <!-- Apply Form -->
+                  <form id="apply-form" class="popup-form" style="display: none;">
+                    <div class="form-group">
+                      <label for="apply-name">Ad Soyad</label>
+                      <input type="text" id="apply-name" name="name" required />
+                    </div>
+                    <div class="form-group">
+                      <label for="apply-email">E-posta</label>
+                      <input type="email" id="apply-email" name="email" required />
+                    </div>
+                    <div class="form-group">
+                      <label for="apply-location">Nerede Çalışabilirsiniz</label>
+                      <div class="checkbox-group" id="apply-location">
+                        <label class="checkbox-item">
+                          <input type="checkbox" name="workLocation" value="Başakşehir">
+                          <span>Başakşehir</span>
+                        </label>
+                        <label class="checkbox-item">
+                          <input type="checkbox" name="workLocation" value="Hadımköy">
+                          <span>Hadımköy</span>
+                        </label>
+                        <label class="checkbox-item">
+                          <input type="checkbox" name="workLocation" value="Esenyurt">
+                          <span>Esenyurt</span>
+                        </label>
+                        <label class="checkbox-item">
+                          <input type="checkbox" name="workLocation" value="Beylikdüzü">
+                          <span>Beylikdüzü</span>
+                        </label>
+                        <label class="checkbox-item">
+                          <input type="checkbox" name="workLocation" value="Çatalca">
+                          <span>Çatalca</span>
+                        </label>
+                        <label class="checkbox-item">
+                          <input type="checkbox" name="workLocation" value="Diğer">
+                          <span>Diğer</span>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="apply-skills">Ne Taşıyabilirsiniz</label>
+                      <div class="checkbox-group" id="apply-skills">
+                        <label class="checkbox-item">
+                          <input type="checkbox" name="skills" value="Kumaş Boşaltma">
+                          <span>Kumaş Boşaltma</span>
+                        </label>
+                        <label class="checkbox-item">
+                          <input type="checkbox" name="skills" value="Konteyner Boşaltma">
+                          <span>Konteyner Boşaltma</span>
+                        </label>
+                        <label class="checkbox-item">
+                          <input type="checkbox" name="skills" value="Tır Boşaltma">
+                          <span>Tır Boşaltma</span>
+                        </label>
+                        <label class="checkbox-item">
+                          <input type="checkbox" name="skills" value="Makine İşçiliği">
+                          <span>Makine İşçiliği</span>
+                        </label>
+                        <label class="checkbox-item">
+                          <input type="checkbox" name="skills" value="Ağır El İşçiliği">
+                          <span>Ağır El İşçiliği</span>
+                        </label>
+                        <label class="checkbox-item">
+                          <input type="checkbox" name="skills" value="Elle İşleme ve Etiketleme">
+                          <span>Elle İşleme ve Etiketleme</span>
+                        </label>
+                      </div>
+                    </div>
+                    <button type="submit" class="btn-primary">Başvuru Gönder</button>
+                  </form>
                 </div>
-                <div class="form-group">
-                  <label for="location">Konum</label>
-                  <select id="location" name="location" required>
-                    <option value="">Bölge Seçin</option>
-                    <option value="Başakşehir">Başakşehir</option>
-                    <option value="Hadımköy">Hadımköy</option>
-                    <option value="Esenyurt">Esenyurt</option>
-                    <option value="Beylikdüzü">Beylikdüzü</option>
-                    <option value="Çatalca">Çatalca</option>
-                    <option value="Diğer">Diğer</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="description">İhtiyaç Açıklaması</label>
-                  <textarea
-                    id="description"
-                    name="description"
-                    rows="4"
-                    placeholder="Kaç kişi, hangi tarih, nasıl bir iş vb."
-                  ></textarea>
-                </div>
-                <button type="submit" class="btn-primary">Talep Gönder</button>
-              </form>
+              </div>
             </div>
           </div>
         </div>

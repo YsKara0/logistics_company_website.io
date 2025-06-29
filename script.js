@@ -35,6 +35,11 @@ function initFormHandling() {
     if (requestForm) {
         requestForm.addEventListener('submit', handleFormSubmit);
     }
+    
+    const applyForm = document.getElementById('apply-form');
+    if (applyForm) {
+        applyForm.addEventListener('submit', handleApplyFormSubmit);
+    }
 }
 
 function handleFormSubmit(e) {
@@ -308,6 +313,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize all features
     initMobileMenu();
     initFormHandling();
+    initCheckboxHandling();
+    initCircularSplitButton();
+    initPopupFormHandling();
     initSmoothScrolling();
     initScrollAnimations();
     initFormEnhancements();
@@ -323,6 +331,8 @@ document.addEventListener('DOMContentLoaded', () => {
     📧 İletişim: info@atlidepohizmetleri.com
     📱 Responsive Design ✓
     🎯 Modern JavaScript ✓
+    🔄 Circular Split Button ✓
+    ✅ Multiple Selection Forms ✓
     `);
 });
 
@@ -331,18 +341,25 @@ document.addEventListener('click', (e) => {
     if (e.target.matches('.contact-btn') || e.target.matches('.btn-contact')) {
         e.preventDefault();
         
-        // Scroll to form
-        const form = document.getElementById('request-form');
-        if (form) {
-            form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // Show popup instead of scrolling to form
+        const circularPopup = document.getElementById('circular-popup');
+        if (circularPopup) {
+            circularPopup.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Set title to Personel Talebi
+            const popupTitle = document.getElementById('popup-title');
+            if (popupTitle) {
+                popupTitle.textContent = 'Personel Talebi';
+            }
             
             // Focus on first input
             setTimeout(() => {
-                const firstInput = form.querySelector('input');
+                const firstInput = circularPopup.querySelector('input');
                 if (firstInput) {
                     firstInput.focus();
                 }
-            }, 1000);
+            }, 500);
         }
     }
 });
@@ -370,12 +387,336 @@ window.addEventListener('unhandledrejection', (e) => {
     console.error('Unhandled promise rejection:', e.reason);
 });
 
+// Circular Split Button Functionality
+function initCircularSplitButton() {
+    const splitButton = document.getElementById('split-button');
+    const circularPopup = document.getElementById('circular-popup');
+    const popupClose = document.getElementById('popup-close');
+    const popupTitle = document.getElementById('popup-title');
+    const splitButtonTop = document.querySelector('.split-button-top');
+    const splitButtonBottom = document.querySelector('.split-button-bottom');
+
+    if (!splitButton || !circularPopup) return;
+
+    // Handle split button clicks
+    function handleSplitButtonClick(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const target = e.target.closest('[data-action]');
+        if (!target) return;
+
+        const action = target.getAttribute('data-action');
+        
+        // Add click animation
+        splitButton.classList.add('clicked');
+        setTimeout(() => {
+            splitButton.classList.remove('clicked');
+        }, 300);
+
+        // Set popup title and show appropriate form based on action
+        const requestForm = document.getElementById('request-form');
+        const applyForm = document.getElementById('apply-form');
+        
+        if (action === 'employee-request') {
+            popupTitle.textContent = 'Personel Talebi';
+            if (requestForm) requestForm.style.display = 'block';
+            if (applyForm) applyForm.style.display = 'none';
+        } else if (action === 'apply') {
+            popupTitle.textContent = 'İş Başvurusu';
+            if (requestForm) requestForm.style.display = 'none';
+            if (applyForm) applyForm.style.display = 'block';
+        }
+
+        // Show popup
+        setTimeout(() => {
+            showCircularPopup();
+        }, 150);
+    }
+
+    // Show circular popup
+    function showCircularPopup() {
+        circularPopup.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+        // Re-initialize checkboxes after popup is shown
+        setTimeout(() => {
+            initCheckboxHandling();
+            const firstInput = circularPopup.querySelector('input');
+            if (firstInput) {
+                firstInput.focus();
+            }
+        }, 500);
+    }
+
+    // Hide circular popup
+    function hideCircularPopup() {
+        circularPopup.classList.remove('active');
+        document.body.style.overflow = '';
+        
+        // Reset form
+        const form = circularPopup.querySelector('form');
+        if (form) {
+            form.reset();
+            hideFormMessage();
+        }
+    }
+
+    // Event listeners
+    splitButtonTop.addEventListener('click', handleSplitButtonClick);
+    splitButtonBottom.addEventListener('click', handleSplitButtonClick);
+    
+    popupClose.addEventListener('click', (e) => {
+        e.preventDefault();
+        hideCircularPopup();
+    });
+
+    // Close popup when clicking on overlay
+    circularPopup.addEventListener('click', (e) => {
+        if (e.target === circularPopup) {
+            hideCircularPopup();
+        }
+    });
+
+    // Close popup with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && circularPopup.classList.contains('active')) {
+            hideCircularPopup();
+        }
+    });
+
+    // Prevent popup from closing when clicking inside content
+    const popupContent = circularPopup.querySelector('.popup-content');
+    if (popupContent) {
+        popupContent.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+    }
+}
+
+// Update form handling to work with popup
+function initPopupFormHandling() {
+    const circularPopup = document.getElementById('circular-popup');
+    if (!circularPopup) return;
+
+    const requestForm = circularPopup.querySelector('#request-form');
+    if (requestForm) {
+        requestForm.addEventListener('submit', handleFormSubmit);
+    }
+}
+
+// Update showFormMessage to work with popup
+function showFormMessage(message, type) {
+    const circularPopup = document.getElementById('circular-popup');
+    const requestForm = circularPopup ? circularPopup.querySelector('#request-form') : document.getElementById('request-form');
+    
+    if (!requestForm) return;
+
+    // Remove existing message
+    const existingMessage = requestForm.querySelector('.form-message');
+    if (existingMessage) {
+        existingMessage.remove();
+    }
+
+    // Create new message element
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `form-message ${type}`;
+    messageDiv.textContent = message;
+
+    // Insert message at the top of the form
+    requestForm.insertBefore(messageDiv, requestForm.firstChild);
+
+    // If popup is active, ensure message is visible
+    if (circularPopup && circularPopup.classList.contains('active')) {
+        const popupBottom = circularPopup.querySelector('.popup-bottom');
+        if (popupBottom) {
+            popupBottom.scrollTop = 0;
+        }
+    }
+}
+
+// Update hideFormMessage to work with popup
+function hideFormMessage() {
+    const circularPopup = document.getElementById('circular-popup');
+    const requestForm = circularPopup ? circularPopup.querySelector('#request-form') : document.getElementById('request-form');
+    
+    if (!requestForm) return;
+
+    const message = requestForm.querySelector('.form-message');
+    if (message) {
+        message.style.opacity = '0';
+        setTimeout(() => {
+            message.remove();
+        }, 300);
+    }
+}
+
+// Apply Form Handler
+function handleApplyFormSubmit(e) {
+    e.preventDefault();
+    
+    const applyForm = document.getElementById('apply-form');
+    if (!applyForm) return;
+    
+    // Get form data
+    const formData = new FormData(applyForm);
+    const name = formData.get('name');
+    const email = formData.get('email');
+    
+    // Get all selected work locations
+    const workLocationCheckboxes = applyForm.querySelectorAll('input[name="workLocation"]:checked');
+    const workLocations = Array.from(workLocationCheckboxes).map(cb => cb.value);
+    
+    // Get all selected skills
+    const skillsCheckboxes = applyForm.querySelectorAll('input[name="skills"]:checked');
+    const skills = Array.from(skillsCheckboxes).map(cb => cb.value);
+
+    // Basic validation
+    if (!name.trim()) {
+        showApplyFormMessage('Lütfen adınızı ve soyadınızı giriniz.', 'error');
+        return;
+    }
+
+    if (!email.trim()) {
+        showApplyFormMessage('Lütfen e-posta adresinizi giriniz.', 'error');
+        return;
+    }
+
+    if (!isValidEmail(email)) {
+        showApplyFormMessage('Lütfen geçerli bir e-posta adresi giriniz.', 'error');
+        return;
+    }
+
+    if (workLocations.length === 0) {
+        showApplyFormMessage('Lütfen çalışabileceğiniz en az bir bölge seçiniz.', 'error');
+        return;
+    }
+
+    if (skills.length === 0) {
+        showApplyFormMessage('Lütfen yapabileceğiniz en az bir iş türü seçiniz.', 'error');
+        return;
+    }
+
+    // Submit form with arrays
+    submitApplyFormToBackend(name, email, workLocations, skills);
+}
+
+function submitApplyFormToBackend(name, email, workLocations, skills) {
+    const applyForm = document.getElementById('apply-form');
+    const submitBtn = applyForm.querySelector('.btn-primary');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Gönderiliyor...';
+    submitBtn.disabled = true;
+
+    // Convert arrays to comma-separated strings for backend
+    const params = new URLSearchParams();
+    params.append('name', name);
+    params.append('email', email);
+    params.append('workLocation', workLocations.join(', '));
+    params.append('skills', skills.join(', '));
+
+    // Submit to backend endpoint
+    fetch('https://atli-app-10e5b634de0b.herokuapp.com/api/v1/public/job-application', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: params
+    })
+    .then(response => {
+        console.log('Apply Response:', response);
+        return response.json();
+    })
+    .then(data => {
+        console.log('Apply Success:', data);
+        showApplyFormMessage('Başvurunuz başarıyla gönderildi! En kısa sürede size dönüş yapacağız.', 'success');
+        applyForm.reset();
+        
+        // Close popup after 3 seconds
+        setTimeout(() => {
+            const circularPopup = document.getElementById('circular-popup');
+            if (circularPopup) {
+                circularPopup.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }, 3000);
+    })
+    .catch(error => {
+        console.error('Apply Error:', error);
+        showApplyFormMessage('Başvuru gönderilirken bir hata oluştu. Lütfen tekrar deneyiniz.', 'error');
+    })
+    .finally(() => {
+        // Reset button
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+    });
+}
+
+function showApplyFormMessage(message, type) {
+    const applyForm = document.getElementById('apply-form');
+    if (!applyForm) return;
+
+    // Remove existing message
+    const existingMessage = applyForm.querySelector('.form-message');
+    if (existingMessage) {
+        existingMessage.remove();
+    }
+
+    // Create new message element
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `form-message ${type}`;
+    messageDiv.textContent = message;
+
+    // Insert message at the top of the form
+    applyForm.insertBefore(messageDiv, applyForm.firstChild);
+
+    // If popup is active, ensure message is visible
+    const circularPopup = document.getElementById('circular-popup');
+    if (circularPopup && circularPopup.classList.contains('active')) {
+        const popupBottom = circularPopup.querySelector('.popup-bottom');
+        if (popupBottom) {
+            popupBottom.scrollTop = 0;
+        }
+    }
+}
+
+// Checkbox interaction handling
+function initCheckboxHandling() {
+    const checkboxItems = document.querySelectorAll('.checkbox-item');
+    
+    checkboxItems.forEach(item => {
+        const checkbox = item.querySelector('input[type="checkbox"]');
+        
+        if (checkbox) {
+            // Handle checkbox change
+            checkbox.addEventListener('change', () => {
+                if (checkbox.checked) {
+                    item.classList.add('checked');
+                } else {
+                    item.classList.remove('checked');
+                }
+            });
+            
+            // Handle clicking on the label
+            item.addEventListener('click', (e) => {
+                if (e.target !== checkbox) {
+                    e.preventDefault();
+                    checkbox.checked = !checkbox.checked;
+                    checkbox.dispatchEvent(new Event('change'));
+                }
+            });
+        }
+    });
+}
+
 // Export functions for testing (if needed)
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
         isValidEmail,
         handleFormSubmit,
         showFormMessage,
-        hideFormMessage
+        hideFormMessage,
+        initCircularSplitButton,
+        initPopupFormHandling
     };
 }
