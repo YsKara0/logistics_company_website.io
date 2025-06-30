@@ -1603,8 +1603,8 @@ body.js-loaded .loading-screen {
 
 /* Circular Split Button Styles */
 .circular-split-button {
-    width: 200px;
-    height: 200px;
+    width: 410px;
+    height: 410px;
     border-radius: 50%;
     background-color: white;
     border: 3px solid #A21B13;
@@ -1630,7 +1630,7 @@ body.js-loaded .loading-screen {
     justify-content: center;
     transition: all 0.3s ease;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 1.3rem;
     color: #A21B13;
 }
 
@@ -1730,32 +1730,34 @@ body.js-loaded .loading-screen {
 .popup-bottom {
     position: relative;
     width: 100%;
-    height: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 15px 20px;
+    padding: 8px 20px;
     box-sizing: border-box;
     overflow: hidden;
 }
 
 .popup-top {
+    height: 35%;
     border-radius: 15px 15px 0 0;
     background: transparent;
 }
 
 .popup-bottom {
+    height: 65%;
     border-radius: 0 0 15px 15px;
     background: transparent;
     overflow-y: auto;
     justify-content: flex-start;
     align-items: stretch;
+    padding-top: 5px;
 }
 
 .popup-divider {
     position: absolute;
-    top: 50%;
+    top: 35%;
     left: 30px;
     right: 30px;
     height: 2px;
@@ -1767,7 +1769,7 @@ body.js-loaded .loading-screen {
 .popup-content h3 {
     color: #A21B13;
     font-size: 1.3rem;
-    margin: 0;
+    margin: 0 0 5px 0;
     text-align: center;
     opacity: 0;
     transition: opacity 0.3s ease 0.2s;
