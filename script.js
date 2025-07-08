@@ -332,6 +332,62 @@ document.addEventListener('click', (e) => {
         if (circularPopup) {
             circularPopup.classList.add('active');
             document.body.style.overflow = 'hidden';
+            document.body.classList.add('popup-open');
+            document.documentElement.classList.add('popup-open'); // HTML element'ine de class ekle
+            
+            // Animasyonu tamamen durdur - Ultra güçlü yaklaşım
+            const style = document.createElement('style');
+            style.id = 'popup-animation-killer';
+            style.textContent = `
+                body.popup-open .circular-split-button::before,
+                body.popup-open .circular-split-button::after {
+                    display: none !important;
+                    animation-name: none !important;
+                    animation-duration: 0s !important;
+                    animation-iteration-count: 0 !important;
+                    animation-play-state: paused !important;
+                    opacity: 0 !important;
+                    visibility: hidden !important;
+                    content: "" !important;
+                    width: 0px !important;
+                    height: 0px !important;
+                    background: none !important;
+                    border: none !important;
+                    z-index: -99999 !important;
+                    transform: none !important;
+                    will-change: auto !important;
+                    pointer-events: none !important;
+                    position: absolute !important;
+                    top: -99999px !important;
+                    left: -99999px !important;
+                }
+                body.popup-open .circular-split-button {
+                    animation: none !important;
+                    transform: none !important;
+                }
+                body.popup-open .circular-popup {
+                    animation: none !important;
+                    will-change: auto !important;
+                }
+                body.popup-open .circular-popup.active {
+                    animation: none !important;
+                    will-change: auto !important;
+                    transform: translate(-50%, -50%) scale(1) !important;
+                    position: fixed !important;
+                    top: 50% !important;
+                    left: 50% !important;
+                }
+            `;
+            if (!document.getElementById('popup-animation-killer')) {
+                document.head.appendChild(style);
+            }
+            
+            // JavaScript ile de animasyonu durdur
+            const splitButton = document.getElementById('split-button');
+            if (splitButton) {
+                splitButton.style.animation = 'none';
+                splitButton.style.animationPlayState = 'paused';
+            }
             
             // Set title to Personel Talebi
             const popupTitle = document.getElementById('popup-title');
@@ -423,6 +479,94 @@ function initCircularSplitButton() {
     function showCircularPopup() {
         circularPopup.classList.add('active');
         document.body.style.overflow = 'hidden';
+        document.body.classList.add('popup-open');
+        document.documentElement.classList.add('popup-open'); // HTML element'ine de class ekle
+        
+        // Animasyonu tamamen durdur ve performansı artır
+        const splitButton = document.getElementById('split-button');
+        if (splitButton) {
+            // Doğrudan element stilini değiştir
+            splitButton.style.setProperty('--disable-animation', 'true');
+            
+            // Popup elementinde de animasyonu durdur
+            circularPopup.style.animation = 'none';
+            circularPopup.style.animationPlayState = 'paused';
+            
+            // Tüm pseudo elementleri kaldırmak için ultra güçlü CSS
+            const style = document.createElement('style');
+            style.id = 'popup-animation-killer';
+            style.textContent = `
+                .circular-popup.active::before,
+                .circular-popup.active::after,
+                .circular-popup::before,
+                .circular-popup::after,
+                body.popup-open .circular-split-button::before,
+                body.popup-open .circular-split-button::after,
+                body.popup-open .circular-popup::before,
+                body.popup-open .circular-popup::after,
+                body.popup-open .circular-popup.active::before,
+                body.popup-open .circular-popup.active::after {
+                    display: none !important;
+                    animation: none !important;
+                    animation-name: none !important;
+                    animation-duration: 0s !important;
+                    animation-iteration-count: 0 !important;
+                    animation-play-state: paused !important;
+                    opacity: 0 !important;
+                    visibility: hidden !important;
+                    content: "" !important;
+                    width: 0px !important;
+                    height: 0px !important;
+                    background: none !important;
+                    border: none !important;
+                    z-index: -99999 !important;
+                    transform: none !important;
+                    will-change: auto !important;
+                    pointer-events: none !important;
+                    position: absolute !important;
+                    top: -99999px !important;
+                    left: -99999px !important;
+                }
+                body.popup-open .circular-split-button {
+                    animation: none !important;
+                    transform: none !important;
+                    will-change: auto !important;
+                }
+                body.popup-open .circular-popup {
+                    animation: none !important;
+                    will-change: auto !important;
+                }
+                body.popup-open .circular-popup.active {
+                    animation: none !important;
+                    will-change: auto !important;
+                    transform: translate(-50%, -50%) scale(1) !important;
+                    position: fixed !important;
+                    top: 50% !important;
+                    left: 50% !important;
+                }
+            `;
+            if (!document.getElementById('popup-animation-killer')) {
+                document.head.appendChild(style);
+            }
+            
+            // Element animasyonunu JavaScript ile de durdur
+            splitButton.style.animation = 'none';
+            splitButton.style.animationPlayState = 'paused';
+            
+            // Tüm child elementlerde de animasyonu durdur
+            const allElements = splitButton.querySelectorAll('*');
+            allElements.forEach(el => {
+                el.style.animation = 'none';
+                el.style.animationPlayState = 'paused';
+            });
+            
+            // Popup'ın child elementlerinde de animasyonu durdur
+            const allPopupElements = circularPopup.querySelectorAll('*');
+            allPopupElements.forEach(el => {
+                el.style.animation = 'none';
+                el.style.animationPlayState = 'paused';
+            });
+        }
         
         // Re-initialize checkboxes after popup is shown
         setTimeout(() => {
@@ -438,6 +582,41 @@ function initCircularSplitButton() {
     function hideCircularPopup() {
         circularPopup.classList.remove('active');
         document.body.style.overflow = '';
+        document.body.classList.remove('popup-open');
+        document.documentElement.classList.remove('popup-open'); // HTML class'ını da kaldır
+        
+        // Animasyonu tekrar aktif hale getir
+        const animationKiller = document.getElementById('popup-animation-killer');
+        if (animationKiller) {
+            animationKiller.remove();
+        }
+        
+        const splitButton = document.getElementById('split-button');
+        if (splitButton) {
+            splitButton.style.removeProperty('--disable-animation');
+            splitButton.style.removeProperty('animation');
+            splitButton.style.removeProperty('animation-play-state');
+            
+            // Child elementlerde de animasyonu geri aç
+            const allElements = splitButton.querySelectorAll('*');
+            allElements.forEach(el => {
+                el.style.removeProperty('animation');
+                el.style.removeProperty('animation-play-state');
+            });
+        }
+        
+        // Popup animasyonunu da geri aç
+        if (circularPopup) {
+            circularPopup.style.removeProperty('animation');
+            circularPopup.style.removeProperty('animation-play-state');
+            
+            // Popup child elementlerinde de animasyonu geri aç
+            const allPopupElements = circularPopup.querySelectorAll('*');
+            allPopupElements.forEach(el => {
+                el.style.removeProperty('animation');
+                el.style.removeProperty('animation-play-state');
+            });
+        }
         
         // Reset form
         const form = circularPopup.querySelector('form');
@@ -633,6 +812,21 @@ function submitApplyFormToBackend(name, email, workLocations, skills) {
                 if (circularPopup) {
                     circularPopup.classList.remove('active');
                     document.body.style.overflow = '';
+                    document.body.classList.remove('popup-open');
+                    document.documentElement.classList.remove('popup-open'); // HTML class'ını da kaldır
+                    
+                    // Animasyonu tekrar aktif hale getir
+                    const animationKiller = document.getElementById('popup-animation-killer');
+                    if (animationKiller) {
+                        animationKiller.remove();
+                    }
+                    
+                    // JavaScript ile animasyonu geri aç
+                    const splitButton = document.getElementById('split-button');
+                    if (splitButton) {
+                        splitButton.style.removeProperty('animation');
+                        splitButton.style.removeProperty('animation-play-state');
+                    }
                 }
             }, 3000);
         } else {
